@@ -27,14 +27,12 @@ app.get('/api/', (req, res) => {
 
 app.get('/api/:date', (req, res) => {
   let { date } = req.params;
-
-  const dateReg = /^\d{4}[./-]\d{2}[./-]\d{2}$/;
-  if(dateReg.test(date)){
-    date = new Date(date);  
-  }else{
-    date = new Date(parseInt(date));
+  const reg = /^\d+$/;
+  if(reg.test(date)){
+    date = parseInt(date);  
   }
-
+  date = new Date(date);
+  
   if(isNaN(date)){
     res.json({"error": "Invalid Date"});
   }else{
